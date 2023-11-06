@@ -34,6 +34,8 @@ class Zombie:
         self.load_images()
         self.frame = random.randint(0, 9)
         self.dir = random.choice([-1,1])
+        self.size_x = 200
+        self.size_y = 200
 
 
     def update(self):
@@ -49,9 +51,9 @@ class Zombie:
 
     def draw(self):
         if self.dir < 0:
-            Zombie.images['Walk'][int(self.frame)].composite_draw(0, 'h', self.x, self.y, 200, 200)
+            Zombie.images['Walk'][int(self.frame)].composite_draw(0, 'h', self.x, self.y, self.size_x, self.size_y)
         else:
-            Zombie.images['Walk'][int(self.frame)].draw(self.x, self.y, 200, 200)
+            Zombie.images['Walk'][int(self.frame)].draw(self.x, self.y, self.size_x, self.size_y)
         # 디버그용 바운딩박스 그리기
         draw_rectangle(*self.get_bb())
 
@@ -61,7 +63,12 @@ class Zombie:
 
     def handle_collision(self, group, other):
         if group == 'zombie:ball':
-            game_world.remove_object(self)
+            self.size_x /= 2
+            self.size_y /= 2
+            self.y -= self.size_y /2
+
+            if self.size_y <= 50 :
+                game_world.remove_object(self)
 
     def get_bb(self):
         return self.x -60, self.y -60,self.x +50, self.y +70
