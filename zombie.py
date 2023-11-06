@@ -4,6 +4,8 @@ import game_framework
 
 from pico2d import *
 
+import game_world
+
 # zombie Run Speed
 PIXEL_PER_METER = (10.0 / 0.3)  # 10 pixel 30 cm
 RUN_SPEED_KMPH = 10.0  # Km / Hour
@@ -50,8 +52,16 @@ class Zombie:
             Zombie.images['Walk'][int(self.frame)].composite_draw(0, 'h', self.x, self.y, 200, 200)
         else:
             Zombie.images['Walk'][int(self.frame)].draw(self.x, self.y, 200, 200)
+        # 디버그용 바운딩박스 그리기
+        draw_rectangle(*self.get_bb())
 
 
     def handle_event(self, event):
         pass
 
+    def handle_collision(self, group, other):
+        if group == 'zombie:ball' : # boy와 좀비 충돌
+            game_world.remove_object(self)
+
+    def get_bb(self):
+        return self.x -20, self.y -50,self.x +20, self.y +50

@@ -216,4 +216,6 @@ class Boy:
     def handle_collision(self, group, other):
         if group == 'boy:ball' : # ball과 충돌한 상황
             self.ball_count+=1
+        if group == 'boy:zombie' : # boy와 좀비 충돌
+            game_framework.quit()
 
