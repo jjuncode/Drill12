@@ -45,11 +45,14 @@ def init():
 
     zombies = [Zombie() for _ in range(5)]
     game_world.add_objects(zombies,1)
+
     game_world.add_collision_pair("boy:zombie",boy,None)
     for zombie in zombies:
-        game_world.add_collision_pair("boy:ball", None, zombie)
-    for zombie in zombies:
-        game_world.add_collision_pair("zombie:ball", None, zombie)
+        game_world.add_collision_pair("boy:zombie", None, zombie)
+
+    # for ball in balls :
+    #     for zombie in zombies:
+    #         game_world.add_collision_pair("zombie:ball", zombie, ball)
 
 
 def finish():
