@@ -2,6 +2,8 @@
 
 from pico2d import get_time, load_image, load_font, clamp, SDL_KEYDOWN, SDL_KEYUP, SDLK_SPACE, SDLK_LEFT, SDLK_RIGHT, \
     draw_rectangle
+
+import play_mode
 from ball import Ball
 import game_world
 import game_framework
@@ -196,6 +198,7 @@ class Boy:
             self.ball_count -= 1
             ball = Ball(self.x, self.y, self.face_dir*10)
             game_world.add_object(ball)
+            game_world.add_collision_pair("zombie:ball", None, ball)
 
     def update(self):
         self.state_machine.update()
@@ -218,4 +221,5 @@ class Boy:
             self.ball_count+=1
         if group == 'boy:zombie' : # boy와 좀비 충돌
             game_framework.quit()
+
 
