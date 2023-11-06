@@ -36,6 +36,7 @@ class Zombie:
         self.dir = random.choice([-1,1])
         self.size_x = 200
         self.size_y = 200
+        self.coll_size = 60
 
 
     def update(self):
@@ -66,9 +67,10 @@ class Zombie:
             self.size_x /= 2
             self.size_y /= 2
             self.y -= self.size_y /2
+            self.coll_size /= 2
 
             if self.size_y <= 50 :
                 game_world.remove_object(self)
 
     def get_bb(self):
-        return self.x -60, self.y -60,self.x +50, self.y +70
+        return self.x -self.coll_size, self.y -self.coll_size,self.x +self.coll_size, self.y +self.coll_size
