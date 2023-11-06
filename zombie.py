@@ -64,4 +64,4 @@ class Zombie:
             game_world.remove_object(self)
 
     def get_bb(self):
-        return self.x -20, self.y -50,self.x +20, self.y +50
+        return self.x -50, self.y -100,self.x +50, self.y +70
